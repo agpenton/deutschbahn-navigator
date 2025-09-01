@@ -1,7 +1,7 @@
 {
   "dxt_version": "1.0",
   "name": "deutschbahn-navigator",
-  "version": "1.3.3",
+  "version": "1.3.5",
   "description": "Deutsche Bahn Navigator - Access train schedules, station information, and journey planning directly through Claude Desktop",
   "author": {
     "name": "Asdrubal Gonzalez Penton",
