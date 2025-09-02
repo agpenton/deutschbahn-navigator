@@ -1,4 +1,4 @@
-import { MAJOR_STATIONS, TRAIN_TYPES, POPULAR_ROUTES, DB_INFO, Station, TrainType, Route } from '../data/db-static-data.js';
+import { MAJOR_STATIONS, TRAIN_TYPES, POPULAR_ROUTES, DB_INFO, Station, TrainType, Route } from '../data/db-static-data';
 
 /**
  * Deutsche Bahn tools that work without external APIs

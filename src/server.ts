@@ -1,5 +1,5 @@
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
-import { logger } from './utils/logger.js';
+import { logger } from './utils/logger';
 
 /**
  * Create and configure the MCP server for Deutsche Bahn Navigator

@@ -2,9 +2,9 @@
 
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
-import { createMCPServer } from './server.js';
-import { logger } from './utils/logger.js';
-import { config } from './utils/config.js';
+import { createMCPServer } from './server';
+import { logger } from './utils/logger';
+import { config } from './utils/config';
 import express from 'express';
 import cors from 'cors';
 
