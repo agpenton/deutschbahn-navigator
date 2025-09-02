@@ -2,7 +2,7 @@ name: Release
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   workflow_dispatch:
 
 jobs:
@@ -60,25 +60,25 @@ jobs:
           name: Release v${{ steps.changesets.outputs.publishedPackages[0].version }}
           body: |
             ## 🚀 Release v${{ steps.changesets.outputs.publishedPackages[0].version }}
-            
+
             ### Deutsche Bahn MCP Extension
-            
+
             This release includes:
             - Station search and information
             - Real-time departures and arrivals
             - Facility status monitoring
             - Journey planning capabilities
-            
+
             ### Installation
-            
+
             1. Download the `.dxt` file from the assets below
             2. Open Claude Desktop
             3. Go to Settings → Extensions
             4. Install the downloaded `.dxt` package
             5. Configure your Deutsche Bahn API credentials (optional)
-            
+
             ### What's Changed
-            
+
             See the full changelog in the repository.
           files: |
             *.dxt
