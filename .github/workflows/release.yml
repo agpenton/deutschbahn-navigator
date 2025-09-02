@@ -1,0 +1,96 @@
+name: Release
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      id-token: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run tests
+        run: npm run test:coverage
+
+      - name: Build project
+        run: npm run build
+
+      - name: Create Release Pull Request or Publish
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          title: 'chore: release package'
+          commit: 'chore: release package'
+          publish: npm run changeset:publish
+          version: npm run changeset:version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Package .dxt for release
+        if: steps.changesets.outputs.published == 'true'
+        run: npm run package-dxt
+
+      - name: Create GitHub Release
+        if: steps.changesets.outputs.published == 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.changesets.outputs.publishedPackages[0].version }}
+          name: Release v${{ steps.changesets.outputs.publishedPackages[0].version }}
+          body: |
+            ## 🚀 Release v${{ steps.changesets.outputs.publishedPackages[0].version }}
+            
+            ### Deutsche Bahn MCP Extension
+            
+            This release includes:
+            - Station search and information
+            - Real-time departures and arrivals
+            - Facility status monitoring
+            - Journey planning capabilities
+            
+            ### Installation
+            
+            1. Download the `.dxt` file from the assets below
+            2. Open Claude Desktop
+            3. Go to Settings → Extensions
+            4. Install the downloaded `.dxt` package
+            5. Configure your Deutsche Bahn API credentials (optional)
+            
+            ### What's Changed
+            
+            See the full changelog in the repository.
+          files: |
+            *.dxt
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload .dxt artifacts
+        if: steps.changesets.outputs.published == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: deutschbahn-mcp-release-${{ steps.changesets.outputs.publishedPackages[0].version }}
+          path: '*.dxt'
+          retention-days: 90

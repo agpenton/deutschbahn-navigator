@@ -1,0 +1,121 @@
+{
+  "dxt_version": "0.1",
+  "name": "deutschbahn",
+  "display_name": "Deutsche Bahn Transport",
+  "version": "0.1.0",
+  "description": "Comprehensive Deutsche Bahn transport information with station search, real-time departures/arrivals, facility status, and journey planning",
+  "long_description": "A comprehensive Desktop Extension for accessing Deutsche Bahn transport information. Features include station search by name/location, detailed station information, real-time departure and arrival boards, facility status checks, and comprehensive journey planning with multiple transport options. All data is sourced from official Deutsche Bahn APIs with proper error handling and retry mechanisms.",
+  "author": {
+    "name": "agpenton",
+    "email": "agpenton@example.com",
+    "url": "https://github.com/agpenton"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agpenton/deutschebahn"
+  },
+  "homepage": "https://github.com/agpenton/deutschebahn",
+  "documentation": "https://github.com/agpenton/deutschebahn#readme",
+  "support": "https://github.com/agpenton/deutschebahn/issues",
+  "license": "MIT",
+  "keywords": [
+    "deutsche-bahn",
+    "db",
+    "transport",
+    "train",
+    "germany",
+    "public-transport"
+  ],
+  "server": {
+    "type": "node",
+    "entry_point": "dist/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/dist/index.js"
+      ],
+      "env": {
+        "NODE_ENV": "production",
+        "DB_API_KEY": "${user_config.db_api_key}",
+        "DB_CLIENT_ID": "${user_config.db_client_id}",
+        "REQUEST_TIMEOUT": "${user_config.request_timeout}",
+        "MAX_RETRIES": "${user_config.max_retries}"
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "deutschbahn.searchStations",
+      "description": "Search for Deutsche Bahn stations by name, location, or coordinates. Returns station details including IDs, names, locations, and coordinates."
+    },
+    {
+      "name": "deutschbahn.stationInfo",
+      "description": "Get detailed information about a specific Deutsche Bahn station including facilities, address, coordinates, and accessibility features."
+    },
+    {
+      "name": "deutschbahn.departures",
+      "description": "Get real-time departure information for a specific station. Includes train types, destinations, platforms, delays, and cancellations."
+    },
+    {
+      "name": "deutschbahn.arrivals",
+      "description": "Get real-time arrival information for a specific station. Includes train types, origins, platforms, delays, and cancellations."
+    },
+    {
+      "name": "deutschbahn.facilityStatus",
+      "description": "Check the current operational status of facilities at Deutsche Bahn stations (elevators, escalators, accessibility features)."
+    },
+    {
+      "name": "deutschbahn.planJourney",
+      "description": "Plan a journey between two stations with comprehensive route options, including connections, durations, prices, and real-time information."
+    }
+  ],
+  "tools_generated": false,
+  "prompts_generated": false,
+  "compatibility": {
+    "claude_desktop": ">=0.10.0",
+    "platforms": [
+      "darwin",
+      "win32",
+      "linux"
+    ],
+    "runtimes": {
+      "node": ">=20.0.0"
+    }
+  },
+  "user_config": {
+    "db_api_key": {
+      "type": "string",
+      "title": "Deutsche Bahn API Key",
+      "description": "API key for accessing Deutsche Bahn services. Get yours from developer.deutschebahn.com",
+      "default": "",
+      "required": false,
+      "sensitive": true
+    },
+    "db_client_id": {
+      "type": "string",
+      "title": "Deutsche Bahn Client ID",
+      "description": "Client ID for Deutsche Bahn API access",
+      "default": "",
+      "required": false,
+      "sensitive": true
+    },
+    "request_timeout": {
+      "type": "number",
+      "title": "Request Timeout (ms)",
+      "description": "Timeout for API requests in milliseconds",
+      "default": 30000,
+      "required": false,
+      "min": 5000,
+      "max": 60000
+    },
+    "max_retries": {
+      "type": "number",
+      "title": "Maximum Retries",
+      "description": "Maximum number of retry attempts for failed requests",
+      "default": 3,
+      "required": false,
+      "min": 0,
+      "max": 5
+    }
+  }
+}
