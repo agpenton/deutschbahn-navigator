@@ -17,6 +17,7 @@
 **Versioning & Changelog:**
 
 - Use Changesets; initial changeset `feat: initial deutschbahn extension`.
+- The version should change according to semantic versioning rules (MAJOR.MINOR.PATCH).
 
 **Branch & PR:**
 

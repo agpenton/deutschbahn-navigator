@@ -28,14 +28,28 @@ npm run build
 npm run package-dxt
 ```
 
+## API Key Setup
+
+**Need an API key?** 📖 See the [**DB API Setup Guide**](./DB_API_SETUP.md) for step-by-step instructions on getting your Deutsche Bahn API credentials.
+
 ## Configuration
 
 The extension supports the following environment variables:
 
-- `DB_API_KEY` - Deutsche Bahn API key (optional)
-- `DB_CLIENT_ID` - Deutsche Bahn client ID (optional)
+- `DB_API_KEY` - Deutsche Bahn API key ([Get yours here](https://developers.deutschebahn.com))
+- `DB_CLIENT_ID` - Deutsche Bahn client ID  
 - `REQUEST_TIMEOUT` - HTTP request timeout in milliseconds (default: 30000)
 - `MAX_RETRIES` - Maximum number of retry attempts (default: 3)
+
+**Claude Desktop Configuration:**
+```json
+{
+  "db_api_key": "your-api-key-here",
+  "db_client_id": "your-client-id-here",
+  "request_timeout": 30000,
+  "max_retries": 3
+}
+```
 
 ## Available Tools
 

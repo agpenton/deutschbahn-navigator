@@ -1,4 +1,4 @@
-import { DeutscheBahnMcpServer } from './mcp/server.js';
+import { MinimalMcpServer } from './minimal-server.js';
 
 // Add comprehensive error logging
 process.on('uncaughtException', (error) => {
@@ -12,33 +12,30 @@ process.on('unhandledRejection', (reason, promise) => {
 });
 
 async function main(): Promise<void> {
-  console.error('Starting Deutsche Bahn MCP Server...');
+  console.error('Starting Minimal Deutsche Bahn MCP Server...');
   console.error('Node version:', process.version);
-  console.error('Process argv:', process.argv);
-  console.error('Environment check - DB_API_KEY exists:', !!process.env.DB_API_KEY);
-  console.error('Environment check - DB_CLIENT_ID exists:', !!process.env.DB_CLIENT_ID);
   
   try {
-    console.error('Creating server instance...');
-    const server = new DeutscheBahnMcpServer();
+    console.error('Creating minimal server instance...');
+    const server = new MinimalMcpServer();
     
-    console.error('Starting server...');
+    console.error('Starting minimal server...');
     await server.start();
     
-    console.error('Server started successfully');
+    console.error('Minimal server started successfully');
     
     // Handle graceful shutdown
     process.on('SIGINT', () => {
-      console.error('Deutsche Bahn MCP Server shutting down...');
+      console.error('Minimal Deutsche Bahn MCP Server shutting down...');
       process.exit(0);
     });
     
     process.on('SIGTERM', () => {
-      console.error('Deutsche Bahn MCP Server shutting down...');
+      console.error('Minimal Deutsche Bahn MCP Server shutting down...');
       process.exit(0);
     });
   } catch (error) {
-    console.error('Failed to start Deutsche Bahn MCP Server:', error);
+    console.error('Failed to start Minimal Deutsche Bahn MCP Server:', error);
     console.error('Error stack:', error instanceof Error ? error.stack : 'No stack trace');
     process.exit(1);
   }

@@ -38,9 +38,9 @@ async function packageDxt() {
     const filesToCopy = [
       'manifest.json',
       'package.json',
-      'dist/index.js',
-      'dist/index.d.ts',
-      'dist/index.js.map',
+      'dist/minimal-index.js',
+      'dist/minimal-index.d.ts',
+      'dist/minimal-index.js.map',
       'README.md',
       'LICENSE'
     ];

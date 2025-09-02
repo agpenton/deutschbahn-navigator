@@ -32,35 +32,49 @@ export class DeutscheBahnMcpServer {
   private readonly journeyService: JourneyService;
 
   constructor() {
-    this.server = new Server(
-      {
-        name: 'deutschbahn-mcp',
-        version: '0.1.0',
-      },
-      {
-        capabilities: {
-          tools: {},
+    console.error('DeutscheBahnMcpServer: Creating server instance');
+    
+    try {
+      this.server = new Server(
+        {
+          name: 'deutschbahn-mcp',
+          version: '0.1.0',
         },
-      }
-    );
+        {
+          capabilities: {
+            tools: {},
+          },
+        }
+      );
+      console.error('DeutscheBahnMcpServer: Server instance created');
 
-    // Initialize HTTP client with configuration
-    const httpClient = new HttpClient({
-      baseURL: 'https://apis.deutschebahn.com',
-      timeout: parseInt(process.env.REQUEST_TIMEOUT || '30000', 10),
-      maxRetries: parseInt(process.env.MAX_RETRIES || '3', 10),
-      retryDelay: 1000,
-      ...(process.env.DB_API_KEY && { apiKey: process.env.DB_API_KEY }),
-      ...(process.env.DB_CLIENT_ID && { clientId: process.env.DB_CLIENT_ID }),
-    });
+      // Initialize HTTP client with configuration
+      console.error('DeutscheBahnMcpServer: Initializing HTTP client');
+      const httpClient = new HttpClient({
+        baseURL: 'https://apis.deutschebahn.com',
+        timeout: parseInt(process.env.REQUEST_TIMEOUT || '30000', 10),
+        maxRetries: parseInt(process.env.MAX_RETRIES || '3', 10),
+        retryDelay: 1000,
+        ...(process.env.DB_API_KEY && { apiKey: process.env.DB_API_KEY }),
+        ...(process.env.DB_CLIENT_ID && { clientId: process.env.DB_CLIENT_ID }),
+      });
+      console.error('DeutscheBahnMcpServer: HTTP client initialized');
 
-    // Initialize services
-    this.stationService = new StationService(httpClient);
-    this.timetableService = new TimetableService(httpClient, this.stationService);
-    this.facilityService = new FacilityService(httpClient, this.stationService);
-    this.journeyService = new JourneyService(httpClient);
+      // Initialize services
+      console.error('DeutscheBahnMcpServer: Initializing services');
+      this.stationService = new StationService(httpClient);
+      this.timetableService = new TimetableService(httpClient, this.stationService);
+      this.facilityService = new FacilityService(httpClient, this.stationService);
+      this.journeyService = new JourneyService(httpClient);
+      console.error('DeutscheBahnMcpServer: Services initialized');
 
-    this.setupHandlers();
+      console.error('DeutscheBahnMcpServer: Setting up handlers');
+      this.setupHandlers();
+      console.error('DeutscheBahnMcpServer: Handlers set up');
+    } catch (error) {
+      console.error('DeutscheBahnMcpServer: Error in constructor:', error);
+      throw error;
+    }
   }
 
   private setupHandlers(): void {
@@ -189,9 +203,17 @@ export class DeutscheBahnMcpServer {
   }
 
   async start(): Promise<void> {
-    const transport = new StdioServerTransport();
-    await this.server.connect(transport);
-    
-    console.error('Deutsche Bahn MCP Server started');
+    try {
+      console.error('DeutscheBahnMcpServer: Creating transport');
+      const transport = new StdioServerTransport();
+      
+      console.error('DeutscheBahnMcpServer: Connecting to transport');
+      await this.server.connect(transport);
+      
+      console.error('Deutsche Bahn MCP Server started successfully');
+    } catch (error) {
+      console.error('DeutscheBahnMcpServer: Error in start method:', error);
+      throw error;
+    }
   }
 }
