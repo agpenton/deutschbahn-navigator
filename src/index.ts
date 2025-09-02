@@ -9,8 +9,8 @@ import express from 'express';
 import cors from 'cors';
 
 /**
- * Deutschbahn Navigator - Claude Desktop Extension
- * Provides train search and listing functionality using Deutsche Bahn APIs
+ * Claude Desktop Navigator - MCP Extension Template
+ * Provides a template for building Claude Desktop extensions using MCP
  */
 
 async function main() {
@@ -21,14 +21,14 @@ async function main() {
     const useHttp = process.env.DB_NAVIGATOR_HTTP === 'true';
     
     if (useHttp) {
-      logger.info('Starting Deutschbahn Navigator in HTTP mode...');
+      logger.info('Starting Claude Desktop Navigator in HTTP mode...');
       await startHttpServer(server);
     } else {
-      logger.info('Starting Deutschbahn Navigator in STDIO mode...');
+      logger.info('Starting Claude Desktop Navigator in STDIO mode...');
       await startStdioServer(server);
     }
   } catch (error) {
-    logger.error('Failed to start Deutschbahn Navigator:', error);
+    logger.error('Failed to start Claude Desktop Navigator:', error);
     process.exit(1);
   }
 }
@@ -39,7 +39,7 @@ async function main() {
 async function startStdioServer(server: McpServer): Promise<void> {
   const transport = new StdioServerTransport();
   await server.server.connect(transport);
-  logger.info('Deutschbahn Navigator connected via STDIO');
+  logger.info('Claude Desktop Navigator connected via STDIO');
 }
 
 /**
