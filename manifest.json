@@ -28,11 +28,11 @@
   ],
   "server": {
     "type": "node",
-    "entry_point": "dist/minimal-index.js",
+    "entry_point": "dist/index.js",
     "mcp_config": {
       "command": "node",
       "args": [
-        "${__dirname}/dist/minimal-index.js"
+        "${__dirname}/dist/index.js"
       ],
       "env": {
         "NODE_ENV": "production",

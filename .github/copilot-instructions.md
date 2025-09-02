@@ -3,7 +3,8 @@
 1. Station Search, 2) Station Info, 3) Real-time Departures, 4) Real-time Arrivals, 5) Facility Status, 6) Journey Planning.
 
 **Follow the style of** https://github.com/openbnb-org/mcp-server-airbnb (TypeScript MCP server, zod, tests, CI).  
-**Repo URLs:** profile https://github.com/agpenton • repo https://github.com/agpenton/deutschebahn
+**Repo URLs:** profile https://github.com/agpenton • repo https://github.com/agpenton/deutschbahn-navigator
+**Use as reference** https://www.desktopextensions.com/#documentation
 
 **Implement exactly:**
 
@@ -17,7 +18,7 @@
 **Versioning & Changelog:**
 
 - Use Changesets; initial changeset `feat: initial deutschbahn extension`.
-- The version should change according to semantic versioning rules (MAJOR.MINOR.PATCH).
+- The version should change according to semantic versioning rules (MAJOR.MINOR.PATCH). If you make incompatible API changes, increment the MAJOR version. For new features, increment the MINOR version. For bug fixes, increment the PATCH version.
 
 **Branch & PR:**
 
