@@ -38,7 +38,7 @@
   "homepage": "https://github.com/agpenton/deutschbahn-navigator",
   "license": "MIT",
   "dependencies": {
-    "@modelcontextprotocol/sdk": "^1.0.3",
+    "@modelcontextprotocol/sdk": "^1.26.0",
     "zod": "^3.23.8",
     "express": "^4.21.1",
     "cors": "^2.8.5",
